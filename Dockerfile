@@ -16,12 +16,7 @@ LABEL org.opencontainers.image.created=${N8N_RELEASE_DATE}
 ENV N8N_VERSION=${N8N_VERSION}
 ENV NODE_ENV=production
 ENV N8N_RELEASE_TYPE=stable
-ENV N8N_SECURE_COOKIE=false
 ENV N8N_RELEASE_DATE=${N8N_RELEASE_DATE}
-ENV N8N_HOST=n8n-self-host-production.up.railway.app
-ENV N8N_PROTOCOL=https
-ENV DB_TYPE=sqlite
-ENV WEBHOOK_TUNNEL_URL=${N8N_PROTOCOL}://${N8N_HOST}
 
 RUN set -eux; \
   npm install -g --omit=dev n8n@${N8N_VERSION} --ignore-scripts && \
