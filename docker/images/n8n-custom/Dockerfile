@@ -3,12 +3,13 @@ ARG NODE_VERSION=20
 # 1. Create an image to build n8n
 FROM --platform=$BUILDPLATFORM n8nio/base:${NODE_VERSION} AS builder
 
-RUN echo ${RAILWAY_SERVICE_ID}
-
 # Build the application from source
 WORKDIR /src
 COPY . /src
-RUN --mount=type=cache,id=s/${RAILWAY_SERVICE_ID}-/pnpm-store,target=/root/.local/share/pnpm/store --mount=type=cache,id=s/${RAILWAY_SERVICE_ID}-/pnpm-metadata,target=/root/.cache/pnpm/metadata DOCKER_BUILD=true pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=s/12b01601-d9b6-4d9e-83b0-ceb06bf5b479-pnpm-store,target=/root/.local/share/pnpm/store \
+	--mount=type=cache,id=s/12b01601-d9b6-4d9e-83b0-ceb06bf5b479-pnpm-metadata,target=/root/.cache/pnpm/metadata \
+	DOCKER_BUILD=true pnpm install --frozen-lockfile
+
 RUN pnpm build
 
 # Delete all dev dependencies
